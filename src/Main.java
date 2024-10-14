@@ -10,6 +10,6 @@ public class Main {
         MainController mainController = initializer.getMainController();
 
         mainController.exibirMenuPrincipal(initializer.getCelularController(), initializer.getGaragemController(), initializer.getMotoristaController(), initializer.getServicoController(), initializer.getVeiculoController());
-
+        //teste
     }
 }

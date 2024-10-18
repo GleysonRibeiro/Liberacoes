@@ -71,6 +71,15 @@ public class VeiculoService {
         return null;
     }
 
+    public Veiculo buscarVeiculoPorPrefixo(String prefixo) {
+        for (Veiculo veiculo : veiculos) {
+            if (veiculo.getPrefixo().equals(prefixo)) {
+                return veiculo;
+            }
+        }
+        return null;
+    }
+
     // Verifica se o veículo já está cadastrado com base na placa
     private boolean veiculoJaExiste(String placa) {
         return buscarVeiculoPorPlaca(placa) != null;

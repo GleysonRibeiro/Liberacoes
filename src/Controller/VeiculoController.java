@@ -1,5 +1,6 @@
 package Controller;
 
+import Factory.TransporteFactory;
 import Model.Veiculo;
 import Service.VeiculoService;
 import View.VeiculoView;
@@ -18,9 +19,12 @@ public class VeiculoController {
     }
 
     // Método para adicionar um veículo
-    public void adicionarVeiculo(Veiculo veiculo) {
+    public Veiculo adicionarVeiculo() {
+        String[] dadosVeiculo = veiculoView.solicitarDadosVeiculo();
+        Veiculo veiculo = TransporteFactory.criarVeiculo(dadosVeiculo[0], dadosVeiculo[1], Integer.parseInt(dadosVeiculo[2]), dadosVeiculo[3]);
         veiculoService.adicionarVeiculo(veiculo);
         System.out.println("Veículo adicionado com sucesso.");
+        return veiculo;
     }
 
     // Método para listar todos os veículos
@@ -35,9 +39,22 @@ public class VeiculoController {
         veiculoView.exibirVeiculo(veiculo);
     }
 
+    public Veiculo encontrarVeiculoPorPrefixo(String prefixo) {
+        Veiculo veiculo = veiculoService.buscarVeiculoPorPrefixo(prefixo);
+        if(veiculo==null){
+            veiculo = adicionarVeiculo();
+        }
+        veiculoView.exibirVeiculo(veiculo);
+        return veiculo;
+    }
+
     // Método para remover um veículo
     public void removerVeiculo(String placa) {
         veiculoService.removerVeiculo(placa);
+    }
+
+    public String solicitarPrefixo(){
+        return veiculoView.solicitarPrefixo();
     }
 
 
@@ -47,7 +64,7 @@ public class VeiculoController {
         while (rodando) {
             switch (veiculoView.exibirMenu()) {
                 case 1:
-                    adicionarVeiculo(veiculoView.solicitarDadosVeiculo());
+                    adicionarVeiculo();
                     break;
                 case 2:
                     removerVeiculo(veiculoView.solicitarPlacaVeiculo());

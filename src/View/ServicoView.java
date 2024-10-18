@@ -68,7 +68,7 @@ public class ServicoView {
     }
 
     // Solicita ao usuário as informações para adicionar um novo serviço
-    public Servico solicitarDadosServico(Motorista motorista, Veiculo veiculo, Garagem garagem) {
+    public String[] solicitarDadosServico() {
         System.out.println("----- Adicionar Novo Serviço -----");
 
         System.out.print("Código do serviço: ");
@@ -80,15 +80,11 @@ public class ServicoView {
         System.out.print("Destino: ");
         String destino = scanner.nextLine();
 
-        LocalDate data = solicitarData();
-        LocalTime horario = solicitarHorario("Horário de partida: ");
-        LocalTime liberacaoPrevista = solicitarHorario("Liberação prevista: ");
-
-        return TransporteFactory.criarViagem(codigo, origem, destino, data, horario, liberacaoPrevista, motorista, veiculo, garagem);
+        return new String[] {codigo, origem, destino};
     }
 
     // Método para solicitar a data com tratamento de erro
-    private LocalDate solicitarData() {
+    public LocalDate solicitarData() {
         LocalDate data = null;
         boolean dataValida = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -108,7 +104,7 @@ public class ServicoView {
     }
 
     // Método para solicitar horário com tratamento de erro
-    private LocalTime solicitarHorario(String mensagem) {
+    public LocalTime solicitarHorario(String mensagem) {
         LocalTime horario = null;
         boolean horarioValido = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");

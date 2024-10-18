@@ -1,11 +1,11 @@
 package Controller;
 
+import Factory.TransporteFactory;
 import Model.Motorista;
 import Service.MotoristaService;
 import View.MotoristaView;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class MotoristaController {
 
@@ -19,8 +19,9 @@ public class MotoristaController {
     }
 
     // Método para adicionar um motorista
-    public void adicionarMotorista() {
-        Motorista motorista = motoristaView.solicitarDadosMotorista();
+    public Motorista adicionarMotorista() {
+        String[] dadosMotorista = motoristaView.solicitarDadosMotorista();
+        Motorista motorista = TransporteFactory.criarMotorista(dadosMotorista[0], dadosMotorista[1]);
         motoristaService.adicionarMotorista(motorista);
         motoristaView.exibirMensagem("Motorista adicionado com sucesso!");
     }
@@ -32,10 +33,18 @@ public class MotoristaController {
     }
 
     // Método para encontrar e exibir detalhes de um motorista
-    public void encontrarMotorista(String matricula) {
+    public Motorista encontrarMotorista(String matricula) {
 
         Motorista motorista = motoristaService.encontrarMotoristaPorMatricula(matricula);
+        if(motorista==null){
+            motorista = adicionarMotorista();
+        }
         motoristaView.exibirDetalhesMotorista(motorista);
+        return motorista;
+    }
+
+    public String solicitarMatricula(){
+       return motoristaView.solicitarMatriculaMotorista();
     }
 
     public void removerMotorista(String matricula){

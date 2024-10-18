@@ -1,5 +1,6 @@
 package Controller;
 
+import Factory.TransporteFactory;
 import Model.Garagem;
 import Service.GaragemService;
 import View.GaragemView;
@@ -17,10 +18,12 @@ public class GaragemController {
     }
 
     // Método para adicionar uma nova garagem
-    public void adicionarGaragem() {
-        Garagem novaGaragem = garagemView.solicitarDadosGaragem();
+    public Garagem adicionarGaragem() {
+        String[] dadosGaragem = garagemView.solicitarDadosGaragem();
+        Garagem novaGaragem = TransporteFactory.criarGaragem(dadosGaragem[0], dadosGaragem[1]);
         garagemService.adicionarGaragem(novaGaragem);
         System.out.println("Garagem adicionada com sucesso!");
+        return novaGaragem;
     }
 
     // Método para listar todas as garagens
@@ -30,13 +33,13 @@ public class GaragemController {
     }
 
     // Método para encontrar e exibir uma garagem pela sigla
-    public void encontrarGaragemPorSigla(String sigla) {
+    public Garagem encontrarGaragemPorSigla(String sigla) {
         Garagem garagem = garagemService.encontrarGaragemPorSigla(sigla);
-        if (garagem != null) {
-            garagemView.exibirGaragem(garagem);
-        } else {
-            garagemView.exibirGaragemNaoEncontrada(sigla);
+        if (garagem == null) {
+            garagem = adicionarGaragem();
         }
+        garagemView.exibirGaragem(garagem);
+        return garagem;
     }
 
     public void removerGaragem(){
@@ -69,6 +72,10 @@ public class GaragemController {
         }
 
 
+    }
+
+    public String solicitarSigla(){
+        return garagemView.solicitarSiglaGaragem();
     }
 
 

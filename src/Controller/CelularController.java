@@ -1,5 +1,6 @@
 package Controller;
 
+import Factory.TransporteFactory;
 import Model.Celular;
 import Service.CelularService;
 import View.CelularView;
@@ -18,7 +19,8 @@ public class CelularController {
 
     // Método para adicionar um novo celular
     public void adicionarCelular() {
-        Celular novoCelular = celularView.solicitarDadosCelular();
+        String[] dadosCelular = celularView.solicitarDadosCelular();
+        Celular novoCelular = TransporteFactory.criarCelular(dadosCelular[0], dadosCelular[1], dadosCelular[2], dadosCelular[3], dadosCelular[4] ,null);
         celularService.adicionarCelular(novoCelular);
         System.out.println("Celular adicionado com sucesso!");
     }

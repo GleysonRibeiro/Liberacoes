@@ -43,13 +43,13 @@ public class MotoristaView {
     }
 
     // Método para solicitar a entrada de um novo motorista
-    public Motorista solicitarDadosMotorista() {
+    public String[] solicitarDadosMotorista() {
         System.out.print("Digite o nome do motorista: ");
         String nome = scanner.nextLine();
         System.out.print("Digite a matrícula do motorista: ");
         String matricula = scanner.nextLine();
 
-        return TransporteFactory.criarMotorista(nome, matricula);  // Cria e retorna um novo objeto Motorista
+        return new String[] {nome, matricula};
     }
     // Solicita o nome do novo motorista para substituição
     public String solicitarMatriculaMotorista() {

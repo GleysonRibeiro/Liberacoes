@@ -47,22 +47,27 @@ public class AppInitializer {
     }
 
     public MotoristaController getMotoristaController() {
+
         return motoristaController;
     }
 
     public VeiculoController getVeiculoController() {
+
         return veiculoController;
     }
 
     public GaragemController getGaragemController() {
+
         return garagemController;
     }
 
     public ServicoController getServicoController() {
+
         return servicoController;
     }
 
     public MainController getMainController(){
+
         return mainController;
     }
 

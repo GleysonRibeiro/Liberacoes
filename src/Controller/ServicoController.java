@@ -1,5 +1,6 @@
 package Controller;
 
+import Factory.TransporteFactory;
 import Model.Garagem;
 import Model.Motorista;
 import Model.Servico;
@@ -12,7 +13,9 @@ import View.MotoristaView;
 import View.ServicoView;
 import View.VeiculoView;
 
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class ServicoController {
@@ -31,14 +34,14 @@ public class ServicoController {
     }
 
     // Método para exibir o menu e processar as opções escolhidas pelo usuário
-    public void exibirMenu() {
+    public void exibirMenu(GaragemController garagemController, MotoristaController motoristaController, VeiculoController veiculoController) {
         boolean rodando = true;
 
         while (rodando) {
 
             switch (servicoView.exibirMenu()) {
                 case 1:
-                    adicionarServico();
+                    adicionarServico(garagemController, motoristaController, veiculoController);
                     break;
                 case 2:
                     removerServico();
@@ -69,11 +72,18 @@ public class ServicoController {
     }
 
     // Método para adicionar um novo serviço
-    private void adicionarServico() {
-        Motorista motorista = motoristaView.solicitarDadosMotorista();
-        Veiculo veiculo = veiculoView.solicitarDadosVeiculo();
-        Garagem garagem = garagemView.solicitarDadosGaragem();
-        Servico servico = servicoView.solicitarDadosServico(motorista, veiculo, garagem);
+    private void adicionarServico(GaragemController garagemController, MotoristaController motoristaController, VeiculoController veiculoController) {
+        String matricula = motoristaController.solicitarMatricula();
+        Motorista motorista = motoristaController.encontrarMotorista(matricula);
+        String prefixo = veiculoController.solicitarPrefixo();
+        Veiculo veiculo = veiculoController.encontrarVeiculoPorPrefixo(prefixo);
+        String sigla = garagemController.solicitarSigla();
+        Garagem garagem = garagemController.encontrarGaragemPorSigla(sigla);
+        String[] dadosServico = servicoView.solicitarDadosServico();
+        LocalDate data = servicoView.solicitarData();
+        LocalTime horario = servicoView.solicitarHorario("Horário de partida: ");
+        LocalTime liberacaoPrevista = servicoView.solicitarHorario("Liberação prevista: ");
+        Servico servico = TransporteFactory.criarViagem(dadosServico[0], dadosServico[1], dadosServico[2], data, horario, liberacaoPrevista, motorista, veiculo, garagem);
         servicoService.adicionarServico(servico);
         System.out.println("Serviço adicionado com sucesso.");
     }

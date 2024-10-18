@@ -15,7 +15,7 @@ public class MainController {
         while(true) {
             switch (mainView.exibirMenu()) {
                 case 1:
-                    servicoController.exibirMenu();
+                    servicoController.exibirMenu(garagemController, motoristaController, veiculoController);
                     break;
                 case 2:
                     garagemController.exibirMenu();

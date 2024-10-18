@@ -39,7 +39,7 @@ public class VeiculoView {
     }
 
     // Método para solicitar a entrada de dados para um novo veículo
-    public Veiculo solicitarDadosVeiculo() {
+    public String[] solicitarDadosVeiculo() {
         System.out.print("Digite a placa do veículo: ");
         String placa = scanner.nextLine();
         System.out.print("Digite o prefixo do veículo: ");
@@ -49,13 +49,18 @@ public class VeiculoView {
         System.out.print("Digite o tipo do veículo: ");
         String tipo = scanner.nextLine();
 
-        // Criar veículo utilizando a fábrica (TransporteFactory)
-        return TransporteFactory.criarVeiculo(placa, prefixo, capacidade, tipo);
+
+        return new String[] {placa, prefixo, String.valueOf(capacidade), tipo};
     }
 
     // Solicita a placa do novo veículo para substituição
     public String solicitarPlacaVeiculo() {
         System.out.print("Informe a placa do novo veículo: ");
+        return scanner.nextLine();
+    }
+
+    public String solicitarPrefixo() {
+        System.out.print("Informe o prefixo do veículo: ");
         return scanner.nextLine();
     }
 

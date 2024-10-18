@@ -1,6 +1,5 @@
 package View;
 
-import Factory.TransporteFactory;
 import Model.Garagem;
 
 import java.util.List;
@@ -29,12 +28,12 @@ public class GaragemView {
     }
 
     // Método para solicitar a entrada de uma nova garagem
-    public Garagem solicitarDadosGaragem() {
+    public String[] solicitarDadosGaragem() {
         System.out.print("Digite o nome da garagem: ");
         String nome = scanner.nextLine();
         System.out.print("Digite a sigla da garagem: ");
         String sigla = scanner.nextLine();
-        return TransporteFactory.criarGaragem(nome, sigla);
+        return new String[] {nome, sigla};
     }
 
     // Método para exibir mensagem de garagem não encontrada

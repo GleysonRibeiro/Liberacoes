@@ -1,8 +1,7 @@
 package View;
 
 import Model.Celular;
-import Model.Motorista;
-import Factory.TransporteFactory;
+
 
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +28,7 @@ public class CelularView {
     }
 
     // Método para solicitar a entrada de um novo celular
-    public Celular solicitarDadosCelular() {
+    public String[] solicitarDadosCelular() {
         System.out.print("Digite o código do celular: ");
         String codigo = scanner.nextLine();
         System.out.print("Digite o número do celular: ");
@@ -41,10 +40,9 @@ public class CelularView {
         System.out.print("Digite a situação do celular (disponível/indisponível): ");
         String situacao = scanner.nextLine();
 
-        // Se precisar de um motorista, solicitar ou gerar como null por enquanto
-        Motorista motorista = null;
 
-        return TransporteFactory.criarCelular(codigo, numero, marca, modelo, situacao, motorista);
+
+        return new String[]{codigo, numero, marca, modelo, situacao};
     }
 
     public String solicitarCodigoCelular() {

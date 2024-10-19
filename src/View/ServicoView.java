@@ -1,10 +1,7 @@
 package View;
 
-import Factory.TransporteFactory;
-import Model.Garagem;
-import Model.Motorista;
 import Model.Servico;
-import Model.Veiculo;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;

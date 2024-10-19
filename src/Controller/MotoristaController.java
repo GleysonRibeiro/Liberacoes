@@ -24,6 +24,7 @@ public class MotoristaController {
         Motorista motorista = TransporteFactory.criarMotorista(dadosMotorista[0], dadosMotorista[1]);
         motoristaService.adicionarMotorista(motorista);
         motoristaView.exibirMensagem("Motorista adicionado com sucesso!");
+        return motorista;
     }
 
     // Método para listar todos os motoristas

@@ -51,13 +51,13 @@ public class GaragemController {
         while (rodando) {
             switch (garagemView.exibirMenu()) {
                 case 1:
-                    adicionarGaragem();
+                    listarGaragens();
                     break;
                 case 2:
-                    removerGaragem();
+                    adicionarGaragem();
                     break;
                 case 3:
-                    listarGaragens();
+                    removerGaragem();
                     break;
                 case 4:
                     encontrarGaragemPorSigla(garagemView.solicitarSiglaGaragem());
